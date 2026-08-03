@@ -9,7 +9,7 @@
 
 The company is a chocolate manufacturer and retailer processing over one million transactions across 200 SKUs spanning five product lines: Praline, White, Dark, Truffle, and Milk. It operates 100 stores across six countries, through four store formats: Retail, Mall, Airport, and Online.
 
-Cocoa is the primary raw material and is exposed to global commodity price volatility. Because cocoa content varies by product (roughly 50%–90%), price swings do not affect every SKU equally — higher-cocoa products carry more raw-material cost exposure. If pricing has not been adjusted accordingly, certain product lines could be quietly eroding profitability. Profitability gaps can also arise at the store level (location, footfall, discounting) that are invisible in company-wide averages — which is why this project evaluates both product and store profitability together.
+Cocoa is the primary raw material and is exposed to global commodity price volatility. Because cocoa content varies by product (roughly 50%–90%), price swings do not affect every SKU equally (higher-cocoa products carry more raw-material cost exposure). If pricing has not been adjusted accordingly, certain product lines could be quietly eroding profitability. Profitability gaps can also arise at the store level (location, footfall, discounting) that are invisible in company-wide averages, which is why this project evaluates both product and store profitability together.
 
 ## 2. Business Problem
 
@@ -70,9 +70,9 @@ Margin % is the primary comparison metric in this project because it normalizes 
 ## 9. Data Source
 
 Exported from the company's ERP/POS system as three relational CSV files:
-- `sales.csv` — transaction fact data
-- `products.csv` — product reference data
-- `stores.csv` — store reference data
+- `sales.csv`: transaction fact data
+- `products.csv`: product reference data
+- `stores.csv`: store reference data
 
 ## 10. Dataset Overview
 
@@ -85,7 +85,7 @@ Exported from the company's ERP/POS system as three relational CSV files:
 | Stores | 100 across 6 countries, 4 store types |
 | Average discount rate | 5.62% |
 
-All 200 SKUs and 100 stores had transaction activity within the period — no rationalization decision is based on missing/zero-activity data.
+All 200 SKUs and 100 stores had transaction activity within the period (meaning no rationalization decision is based on missing/zero-activity data).
 
 ## 11. Data Dictionary
 
@@ -106,7 +106,7 @@ All 200 SKUs and 100 stores had transaction activity within the period — no ra
 | Out-of-range values (discount/quantity/cocoa%) | 0 |
 | **Invalid `product_id` references** | **9,764 rows (0.98%)** |
 
-Two `product_id` values (`P0000`, `P0201`) referenced in `sales.csv` did not exist in `products.csv`. These rows were excluded, since they could not be assigned a category or cocoa content — both central to the business questions. This is treated as a data quality finding and drives the long-term recommendation for stronger input validation at the source system.
+Two `product_id` values (`P0000`, `P0201`) referenced in `sales.csv` did not exist in `products.csv`. These rows were excluded since they could not be assigned a category or cocoa content (both of which are central to the business questions). This is treated as a data quality finding and drives the long-term recommendation for stronger input validation at the source system.
 
 ## 13. Data Modeling — Star Schema
 
@@ -161,7 +161,7 @@ Star Schema was chosen over a flat table to avoid duplicating product/store attr
 
 ## 17. Business Analysis by Question
 
-**BQ1 — Category profitability**
+**BQ1. Category profitability**
 
 | Category | Revenue | Profit | Margin % | % of Revenue |
 |---|---|---|---|---|
@@ -171,7 +171,7 @@ Star Schema was chosen over a flat table to avoid duplicating product/store attr
 | Truffle | $3,924,343.24 | $1,569,202.54 | 39.99% | 15.55% |
 | Milk | $3,280,368.19 | $1,312,407.13 | 40.01% | 13.00% |
 
-**BQ2 — Cocoa tier profitability**
+**BQ2. Cocoa tier profitability**
 
 | Cocoa Level | SKUs | Avg Cocoa % | Margin % |
 |---|---|---|---|
@@ -179,7 +179,7 @@ Star Schema was chosen over a flat table to avoid duplicating product/store attr
 | Medium (60–75%) | 73 | 65.89% | 40.00% |
 | High (>75%) | 76 | 85.14% | 40.01% |
 
-**BQ3 — Geographic profitability**
+**BQ3. Geographic profitability**
 
 | Country | Stores | Revenue | Profit | Margin % | % of Revenue |
 |---|---|---|---|---|---|
@@ -192,11 +192,11 @@ Star Schema was chosen over a flat table to avoid duplicating product/store attr
 
 Top-ranked stores within each country (via `RANK() OVER (PARTITION BY country)`) showed margins of 39.9%–40.4% — in line with the company average, indicating their lead comes from volume rather than margin efficiency.
 
-**BQ4 — Discount effectiveness**
+**BQ4. Discount effectiveness**
 
 The 15 lowest-profit stores averaged 5.48%–5.81% discount (vs. 5.62% company-wide) — not meaningfully different. Pearson correlation between discount and quantity across 146,914 transactions in these stores: **r = 0.0047**.
 
-## 18. Statistical Analysis — Pearson Correlation
+## 18. Statistical Analysis: Pearson Correlation
 
 **Method:** Standard Pearson correlation formula, computed manually in SQL using `SUM`, `POW`, and `SQRT`, since MySQL has no built-in `CORR()` function (unlike PostgreSQL).
 
