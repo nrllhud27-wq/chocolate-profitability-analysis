@@ -33,7 +33,7 @@ GROUP BY cocoa_level
 ORDER BY avg_cocoa_pct;
 
 -- c. Business Analysis: BQ #3 (Profitabilitas Geografis & Ranking Toko)
--- c.1 — Profit per Negara
+-- c.1 Profit per Negara
 SELECT
     st.country,
     COUNT(DISTINCT st.store_id) AS jumlah_toko,
@@ -46,7 +46,7 @@ JOIN stores st ON s.store_id = st.store_id
 GROUP BY st.country
 ORDER BY total_profit DESC;
 
--- c.2 — Ranking Toko Terbaik per Negara (Window Function)
+-- c.2 Ranking Toko Terbaik per Negara (Window Function)
 SELECT *
 FROM (
     SELECT
@@ -65,7 +65,7 @@ WHERE rank_in_country <= 3
 ORDER BY country, rank_in_country;
 
 -- d. Business Analysis: BQ #4 (Korelasi Diskon vs Volume di Toko Underperforming)
--- d.1 — Identifikasi & profil 15 toko performa terendah
+-- d.1 Identifikasi & profil 15 toko performa terendah
 WITH bottom_stores AS (
     SELECT store_id
     FROM sales
@@ -88,7 +88,7 @@ WHERE s.store_id IN (SELECT store_id FROM bottom_stores)
 GROUP BY st.store_id, st.store_name, st.country, st.store_type
 ORDER BY store_profit ASC;
 
--- d.2 — Pearson Correlation: discount vs quantity (khusus 15 toko ini)
+-- d.2 Pearson Correlation: discount vs quantity (khusus 15 toko ini)
 WITH bottom_stores AS (
     SELECT store_id
     FROM sales
@@ -110,7 +110,7 @@ SELECT
 FROM sales s
 WHERE s.store_id IN (SELECT store_id FROM bottom_stores);
 
--- e. Bonus Analysis: Store Type Performance (Airport vs Lainnya)
+-- e. Store Type Performance (Airport vs Lainnya)
 SELECT
     st.store_type,
     COUNT(DISTINCT st.store_id) AS jumlah_toko,
