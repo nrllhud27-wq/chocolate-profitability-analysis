@@ -16,8 +16,7 @@ FROM sales;
 -- =========================================
 -- B. DUPLICATE CHECK
 -- =========================================
--- order_id sudah PRIMARY KEY (otomatis unik), 
--- tapi kita cek juga products & stores
+-- order_id sudah PRIMARY KEY (otomatis unik)
 SELECT product_id, COUNT(*) AS jumlah
 FROM products
 GROUP BY product_id
@@ -78,7 +77,7 @@ LEFT JOIN products p ON s.product_id = p.product_id
 WHERE p.product_id IS NULL;
 
 -- =========================================
--- 2. Pasang kembali FK constraint (jaminan integritas ke depan)
+-- 2. Pasang kembali FK constraint
 -- =========================================
 ALTER TABLE sales
     ADD CONSTRAINT fk_sales_product FOREIGN KEY (product_id) REFERENCES products(product_id),
