@@ -48,8 +48,6 @@ CREATE TABLE sales (
 
 -- =========================================
 -- 5. IMPORT CSV
--- Urutan WAJIB: products & stores dulu, baru sales
--- (karena sales punya FK ke keduanya)
 -- =========================================
 SET GLOBAL local_infile = 1;
 
@@ -86,8 +84,6 @@ SELECT 'sales', COUNT(*) FROM sales;
 -- Hapus tabel sales yang FK-nya menolak baris kotor
 DROP TABLE sales;
 
--- Buat ulang TANPA foreign key dulu — 
--- FK akan kita pasang lagi setelah data dibersihkan di PHASE 3
 CREATE TABLE sales (
     order_id        VARCHAR(15)   PRIMARY KEY,
     order_date      DATE          NOT NULL,
@@ -109,5 +105,5 @@ ENCLOSED BY '"'
 LINES TERMINATED BY '\r\n'
 IGNORE 1 ROWS;
 
--- Validasi ulang — sekarang harus 1.000.000
+-- Validasi ulang
 SELECT COUNT(*) AS total_rows FROM sales;
