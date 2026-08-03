@@ -82,4 +82,4 @@ README.md
 
 ## Author
 
-*[Your Name]* — Data Analyst Portfolio Project
+*Nurul Huda* — Data Analyst Portfolio Project
