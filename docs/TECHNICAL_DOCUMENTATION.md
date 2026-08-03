@@ -108,7 +108,7 @@ All 200 SKUs and 100 stores had transaction activity within the period (meaning 
 
 Two `product_id` values (`P0000`, `P0201`) referenced in `sales.csv` did not exist in `products.csv`. These rows were excluded since they could not be assigned a category or cocoa content (both of which are central to the business questions). This is treated as a data quality finding and drives the long-term recommendation for stronger input validation at the source system.
 
-## 13. Data Modeling — Star Schema
+## 13. Data Modeling: Star Schema
 
 ```
                     Dim_Product
@@ -120,7 +120,7 @@ Dim_Store  ── 1:* ──  Sales_Fact  ── 1:* ──  Dim_Calendar
 - **Fact:** `Sales_Fact` — one row per transaction.
 - **Dimensions:** `Dim_Product` (200 SKUs, includes engineered `cocoa_level`), `Dim_Store` (100 stores), `Dim_Calendar` (731 continuous dates, built specifically to support Power BI time-intelligence).
 
-Star Schema was chosen over a flat table to avoid duplicating product/store attributes across ~1M rows, to let Power BI's VertiPaq engine compress and query efficiently, and to match how business users naturally filter data — by product, store, or time.
+Star Schema was chosen over a flat table to avoid duplicating product/store attributes across ~1M rows, to let Power BI's VertiPaq engine compress and query efficiently, and to match how business users naturally filter data (by product, store, or time).
 
 ---
 
