@@ -1,5 +1,5 @@
 # Commercial Profitability & Product Strategy
-### End-to-End Data Analysis Project — SQL (MySQL) + Power BI
+### End-to-End Data Analysis Project: SQL (MySQL) + Power BI
 
 📄 **[Read the full technical documentation →](docs/TECHNICAL_DOCUMENTATION.md)** *(detailed methodology, SQL logic, and statistical analysis for technical reviewers)*
 
@@ -9,7 +9,7 @@
 
 Analysis of **990,236 validated transactions** (2023–2024) for a chocolate manufacturer operating **200 SKUs** across **100 stores** in **6 countries**. Management suspected that high-cocoa products were mispriced and that certain stores were structurally underperforming.
 
-The data **did not support either hypothesis**. Gross margin remained consistently around **40%** across every product category, cocoa tier, and country. Discount depth also showed **no correlation** with sales volume in underperforming stores (Pearson r = 0.0047). The core recommendation is to shift strategic focus from margin optimization — already near-optimal — toward **volume and traffic growth**.
+The data **did not support either hypothesis**. Gross margin remained consistently around **40%** across every product category, cocoa tier, and country. Discount depth also showed **no correlation** with sales volume in underperforming stores (Pearson r = 0.0047). The core recommendation is to shift strategic focus from margin optimization (already near-optimal) toward **volume and traffic growth**.
 
 ---
 
@@ -53,13 +53,13 @@ The data **did not support either hypothesis**. Gross margin remained consistent
 
 ## Dashboard Preview
 
-**Executive Dashboard** — company-wide KPIs, geographic profitability map, Top/Bottom 10 stores
+**Executive Dashboard**: company-wide KPIs, geographic profitability map, Top/Bottom 10 stores
 ![Executive Dashboard](dashboard/executive_dashboard.png)
 
-**Operational Dashboard** — category performance, cocoa % vs. margin, store-type contribution
+**Operational Dashboard**: category performance, cocoa % vs. margin, store-type contribution
 ![Operational Dashboard](dashboard/operational_dashboard.png)
 
-**Store Deep-Dive** — transaction-level drill-through by store
+**Store Deep-Dive**: transaction-level drill-through by store
 ![Store Detail](dashboard/store_detail.png)
 
 ---
@@ -82,4 +82,5 @@ README.md
 
 ## Author
 
-*Nurul Huda* — Data Analyst Portfolio Project
+*Nurul Huda* 
+Data Analyst Portfolio Project
