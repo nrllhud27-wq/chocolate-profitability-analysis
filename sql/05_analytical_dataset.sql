@@ -26,7 +26,6 @@ CREATE TABLE dim_calendar (
 );
 
 -- Generate baris tanggal dari 2023-01-01 s/d 2024-12-31
--- pakai recursive CTE (MySQL 8.0+)
 INSERT INTO dim_calendar (`date_key`, `year`, `quarter`, `month_num`, `month_name`, `year_month`, `day_of_week`, `is_weekend`)
 WITH RECURSIVE date_series AS (
     SELECT DATE('2023-01-01') AS dt
